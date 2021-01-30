@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Posts from "./componentes/Posts";
+import {Usuarios} from "./types/Usuarios"
 
 const API = "https://jsonplaceholder.typicode.com";
 
 function App() {
-  const [usuarios, setUsuarios] = useState([]);
-  const [id, setId] = useState("");
+  const [usuarios, setUsuarios] = useState<Usuarios[]>([]);
+  const [id, setId] = useState<Number>();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -14,7 +15,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (id === "") return;
     axios
       .get(`${API}/users/${id}/posts`)
       .then((resposta) => setPosts(resposta.data));
